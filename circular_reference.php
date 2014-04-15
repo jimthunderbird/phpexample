@@ -10,26 +10,43 @@ class OBJECT
 
 class ABC extends OBJECT
 {
+    private $fg;
+
     public function __construct()
     {
         print "abc..."; 
     }
 
-    public function create_new()
+    public function setVar($obj)
     {
-        $obj = new CDE();
-        return $obj;
+        $this->fg = $obj;
     }
 }
 
 class CDE extends OBJECT
 {
-    public function __construct()
+    public $member = null;
+
+    public function __construct($obj)
     {
-        $abc = new ABC();
-        $abc->create_new();
+        $this->member = $obj;
     }
 }
 
+class FG extends OBJECT
+{
+    public $member = null;
+
+    public function __construct($obj)
+    {
+        $this->member = $obj;
+    }
+}
+
+
+
 $abc = new ABC();
-$abc->create_new();
+$cde = new CDE($abc);
+$fg = new FG($cde);
+$abc->setVar($fg);
+
